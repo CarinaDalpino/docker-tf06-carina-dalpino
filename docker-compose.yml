@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx_lab
+    ports:
+      - "8000:80"
+    depends_on:
+      - cache
+
+  cache:
+    image: redis:alpine
+    container_name: redis_lab
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
